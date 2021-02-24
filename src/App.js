@@ -1,73 +1,96 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
 
-function App() {
-  const person = {
-    firstName: 'Nayem',
-    lastName: 'Khan',
-    job: 'Programmer'
+
+
+  // main body core part website
+  function App() {
+    const person = {
+      firstName: 'Nayem',
+      lastName: 'Khan',
+      job: 'Programmer'
+    }
+    const products = [
+      { name: 'Photography  (20GB)', price: 9.99 },
+      { name: 'All Apps', price: 8.54 },
+      { name: 'Acrobat Pro', price: 7.04 },
+      { name: 'Photoshop', price: 5.04 },
+      { name: 'Premiere Pro', price: 20.04 }
+    ]
+    const bookLists = ['Bangla', 'Bangla 2', 'English', 'Math', 'Science']
+ 
+    return (
+      <div className="App" >
+        <header className="App-header" >
+          {/* <img src={logo} className="App-logo" alt="logo" /> */}
+          <p> My Heading: {person.firstName + ' ' + person.lastName} </p>
+
+        <Counter></Counter>
+
+          {
+            <ul>
+              {products.map(product => <li>{product.name}</li>)}
+            </ul>
+          }
+          {
+            <ul>
+              {bookLists.map(bookList => <li>{bookList}</li>)}
+            </ul>
+          }
+
+          
+
+          <Product name={products[0].name} price={products[0].price}></Product>
+          <Product name={products[1].name} price={products[1].price}></Product>
+        </header>
+      </div>
+    );
   }
-  const product = [
-    {name: 'Photography  (20GB)', price :9.99},
-    {name: 'All Apps', price :8.54},
-    {name: 'Acrobat Pro', price :7.04},
-    {name: 'Photoshop', price :5.04},
-]
-  return (
-    <div className="App" >
-      <header className="App-header" >
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p> My Heading: {person.firstName + ' ' + person.lastName} </p>
-        <Product name = {product[0].name} price = {product[0].price}></Product>
-        <Product name = {product[1].name} price = {product[1].price}></Product>
-        <Product name = {product[3].name} price = {product[3].price}></Product>
-        <Person name = 'Musi' country = 'Bangladesh'></Person>
-        <Person name = 'Gayle' country = 'Westerlies'></Person>
-        <Person name = 'Sakib Al Hasan' country = 'Bangladesh'></Person>
-        <Person name = 'Warner' country = 'Australia'></Person>
-      </header>
-    </div>
-  );
-}
 
-function Person(props) {
-  const personStyle = {
-    border : '2px solid yellow',
-    margin : '10px',
-    padding : '10px'
-  }
-
-  return (
-    <div style={personStyle}>
-      <h1>Player Name : {props.name}</h1>
-      <h3>Country : {props.country}</h3>
-    </div>
-  )
-}
-
-function Product(props){
+function Product(props) {
   const productStyle = {
-    width:'200px',
-    height:'250px',
-    backgroundColor : 'gray',
-    boxShadow : '5px 5px 7px lightgray',
-    padding : '10px',
-    borderRadius:'10px',
-    color:'red',
-    margin : '10px'
+    width: '200px',
+    height: '250px',
+    backgroundColor: 'gray',
+    boxShadow: '5px 5px 7px lightgray',
+    padding: '10px',
+    borderRadius: '10px',
+    color: 'red',
+    margin: '10px'
   }
   const gridStyle = {
     display: 'flex',
   }
-  return(
-    <div style = {gridStyle}>
-      <div style = {productStyle}>
+  return (
+    <div style={gridStyle}>
+      <div style={productStyle}>
         <h4>{props.name}</h4>
         <h3>US ${props.price}</h3>
         <button>Buy Now</button>
       </div>
     </div>
   )
+
+}
+
+function Counter() {
   
+  const [count, setState] = useState(0);
+  const increaseBtn = () => {
+    setState(count + 1);
+  };
+  const decreaseBtn = () => {
+    if (count > 0) {
+      setState(count - 1);
+    }
+  };
+  return(
+    <div>
+      <h1>Counter : {count}</h1>
+      <button onClick ={increaseBtn} >Increase</button>
+      <button onClick ={decreaseBtn} >Decrease</button>
+    </div>
+  )
 }
 export default App;
